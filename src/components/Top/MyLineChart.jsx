@@ -20,15 +20,6 @@ const counts = [
 const MyLineChart = () => {
   const { getFromLocalStore, getAllVehicles } = useStateContext();
 
-  const countBycar = getAllVehicles.reduce((counts, object) => {
-    let car = object.vehicleType;
-    counts[car] = (counts[car] || 0) + 1;
-    return counts;
-  }, {});
-
-  let carCounts = Object.entries(countBycar).map(([car, count]) => {
-    return { name: car, value: count };
-  });
   for (const vehicle of getAllVehicles) {
     // Increment the count for the appropriate vehicle type
     if (vehicle.vehicleType === "Microbus") {
@@ -80,7 +71,7 @@ const MyLineChart = () => {
       <LineChart
         width={500}
         height={250}
-        data={data}
+        data={counts}
         margin={{
           top: 5,
           right: 30,

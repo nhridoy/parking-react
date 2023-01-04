@@ -20,11 +20,9 @@ import {
 } from "../../utils/localStorages";
 
 const UpdateModal = ({ open, datas, handleModal }) => {
-  const { getFromLocalStore, getAllVehicles } = useStateContext();
+  const { getAllVehicles } = useStateContext();
 
-  const [current, setCurrent] = useState(
-    getAllVehicles.find((i) => i.id === datas)
-  );
+  const current = getAllVehicles.find((i) => i.id === datas);
 
   const [defaultEntryDate, setDefaultEntryDate] = useState(
     moment().format("MM/DD/YYYY h:mm A")
