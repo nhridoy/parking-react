@@ -8,17 +8,16 @@ import { useStateContext } from "../../contexts/ContextProvider";
 const Body = () => {
   const [open, setOpen] = useState(null);
   const [newData, setNewData] = useState(false);
-  const { getFromLocalStore } = useStateContext();
-  const [datas, setDatas] = useState(getFromLocalStore());
+  const { getFromLocalStore, getAllVehicles } = useStateContext();
 
   const handleModal = (params) => {
     setOpen(open ? null : params.id);
-    setDatas(getFromLocalStore());
+    getFromLocalStore();
   };
 
   const handleNewModal = (params) => {
     setNewData(!newData);
-    setDatas(getFromLocalStore());
+    getFromLocalStore();
   };
   const data = {
     columns: [
@@ -76,7 +75,7 @@ const Body = () => {
         },
       },
     ],
-    rows: [...datas],
+    rows: [...getAllVehicles],
     initialState: {
       columns: {
         columnVisibilityModel: {

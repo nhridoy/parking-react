@@ -18,9 +18,9 @@ const counts = [
 ];
 
 const MyLineChart = () => {
-  const { getFromLocalStore } = useStateContext();
+  const { getFromLocalStore, getAllVehicles } = useStateContext();
 
-  const countBycar = getFromLocalStore().reduce((counts, object) => {
+  const countBycar = getAllVehicles.reduce((counts, object) => {
     let car = object.vehicleType;
     counts[car] = (counts[car] || 0) + 1;
     return counts;
@@ -29,7 +29,7 @@ const MyLineChart = () => {
   let carCounts = Object.entries(countBycar).map(([car, count]) => {
     return { name: car, value: count };
   });
-  for (const vehicle of getFromLocalStore()) {
+  for (const vehicle of getAllVehicles) {
     // Increment the count for the appropriate vehicle type
     if (vehicle.vehicleType === "Microbus") {
       counts[0].microbus += 1;

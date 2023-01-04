@@ -20,10 +20,10 @@ import {
 } from "../../utils/localStorages";
 
 const UpdateModal = ({ open, datas, handleModal }) => {
-  const { getFromLocalStore } = useStateContext();
+  const { getFromLocalStore, getAllVehicles } = useStateContext();
 
   const [current, setCurrent] = useState(
-    getFromLocalStore().find((i) => i.id === datas)
+    getAllVehicles.find((i) => i.id === datas)
   );
 
   const [defaultEntryDate, setDefaultEntryDate] = useState(

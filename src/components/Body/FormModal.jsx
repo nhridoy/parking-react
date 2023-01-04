@@ -16,7 +16,7 @@ import { useStateContext } from "../../contexts/ContextProvider";
 import { addToLocalStorage } from "../../utils/localStorages";
 
 const FormModal = ({ open, handleModal }) => {
-  const { getFromLocalStore } = useStateContext();
+  const { getFromLocalStore, getAllVehicles } = useStateContext();
   const [defaultEntryDate, setDefaultEntryDate] = useState(
     moment().format("MM/DD/YYYY h:mm A")
   );

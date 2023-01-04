@@ -4,9 +4,9 @@ import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from "recharts";
 import { useStateContext } from "../../contexts/ContextProvider";
 
 const MyPieChart = () => {
-  const { getFromLocalStore } = useStateContext();
+  const { getFromLocalStore, getAllVehicles } = useStateContext();
 
-  const countBycar = getFromLocalStore().reduce((counts, object) => {
+  const countBycar = getAllVehicles.reduce((counts, object) => {
     let car = object.vehicleType;
     counts[car] = (counts[car] || 0) + 1;
     return counts;
