@@ -11,6 +11,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useStateContext } from "../../contexts/ContextProvider";
+const counts = [
+  { name: "Daily", microbus: 0, car: 0, truck: 0 },
+  { name: "Weekly", microbus: 0, car: 0, truck: 0 },
+  { name: "Monthly", microbus: 0, car: 0, truck: 0 },
+];
 
 const MyLineChart = () => {
   const { getFromLocalStore } = useStateContext();
@@ -24,7 +29,22 @@ const MyLineChart = () => {
   let carCounts = Object.entries(countBycar).map(([car, count]) => {
     return { name: car, value: count };
   });
-  console.log(carCounts);
+  for (const vehicle of getFromLocalStore()) {
+    // Increment the count for the appropriate vehicle type
+    if (vehicle.vehicleType === "Microbus") {
+      counts[0].microbus += 1;
+      counts[1].microbus += 1;
+      counts[2].microbus += 1;
+    } else if (vehicle.vehicleType === "Car") {
+      counts[0].car += 1;
+      counts[1].car += 1;
+      counts[2].car += 1;
+    } else if (vehicle.vehicleType === "Truck") {
+      counts[0].truck += 1;
+      counts[1].truck += 1;
+      counts[2].truck += 1;
+    }
+  }
 
   const data = [
     {

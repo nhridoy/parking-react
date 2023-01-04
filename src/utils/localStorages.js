@@ -2,12 +2,27 @@
 const addToLocalStorage = (data) => {
   let cars = JSON.parse(localStorage.getItem("cars"));
   if (cars) {
-    cars.push(data);
-    localStorage.setItem("cars", JSON.stringify(cars));
+    const filtered = cars.filter((i) => i.id != data.id);
+    if (filtered) {
+      filtered.push(data);
+      localStorage.setItem("cars", JSON.stringify(filtered));
+    } else {
+      cars.push(data);
+      localStorage.setItem("cars", JSON.stringify(cars));
+    }
   } else {
     localStorage.setItem("cars", JSON.stringify([data]));
   }
 };
+// const addToLocalStorage = (data) => {
+//   let cars = JSON.parse(localStorage.getItem("cars"));
+//   if (cars) {
+//     cars.push(data);
+//     localStorage.setItem("cars", JSON.stringify(cars));
+//   } else {
+//     localStorage.setItem("cars", JSON.stringify([data]));
+//   }
+// };
 
 // Remove cars data from LocalStorage
 const removeFromLocalStorage = (data) => {

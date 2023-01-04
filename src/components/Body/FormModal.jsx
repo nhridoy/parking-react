@@ -11,6 +11,7 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import moment from "moment";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useStateContext } from "../../contexts/ContextProvider";
 import { addToLocalStorage } from "../../utils/localStorages";
 
@@ -32,11 +33,7 @@ const FormModal = ({ open, handleModal }) => {
     watch,
     control,
     formState: { errors },
-  } = useForm({
-    // defaultValues: {
-    //   parkingCharge: 100,
-    // },
-  });
+  } = useForm();
 
   const changeVehicle = (currentVehicle) => {
     setDefaultCharge(
@@ -45,6 +42,14 @@ const FormModal = ({ open, handleModal }) => {
   };
 
   const onSubmit = (data) => {
+    if (
+      data?.exitTime &&
+      moment(data?.entryTime).format("MM/DD/YYYY h:mm A") >
+        moment(data?.exitTime).format("MM/DD/YYYY h:mm A")
+    ) {
+      toast.error("Exit date can not be greater");
+      return;
+    }
     addToLocalStorage({
       ...data,
       id: Date.now(),
@@ -53,6 +58,7 @@ const FormModal = ({ open, handleModal }) => {
         ? moment(data?.exitTime).format("MM/DD/YYYY h:mm A")
         : "",
     });
+    toast.success("Vehicle Added");
     handleModal();
   };
 

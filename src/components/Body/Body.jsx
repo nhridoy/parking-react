@@ -8,13 +8,12 @@ import { useStateContext } from "../../contexts/ContextProvider";
 const Body = () => {
   const [open, setOpen] = useState(null);
   const [newData, setNewData] = useState(false);
-  const { getData, getFromLocalStore } = useStateContext();
+  const { getFromLocalStore } = useStateContext();
   const [datas, setDatas] = useState(getFromLocalStore());
 
   const handleModal = (params) => {
-    console.log(open ? null : params.id);
     setOpen(open ? null : params.id);
-    // setDatas(getFromLocalStore());
+    setDatas(getFromLocalStore());
   };
 
   const handleNewModal = (params) => {

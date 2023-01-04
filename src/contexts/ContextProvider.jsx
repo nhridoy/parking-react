@@ -7,9 +7,9 @@ export const ContextProvider = ({ children }) => {
   const getFromLocalStore = () => {
     return getFromLocalStorage();
   };
-  const getData = getFromLocalStorage();
+
   return (
-    <StateContext.Provider value={{ getFromLocalStore, getData }}>
+    <StateContext.Provider value={{ getFromLocalStore }}>
       {children}
     </StateContext.Provider>
   );
